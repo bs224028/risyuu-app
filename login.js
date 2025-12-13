@@ -1,5 +1,5 @@
 async function login() {
-  const id = document.getElementById("userId").value;
+  const id = document.getElementById("id").value;
   const pw = document.getElementById("password").value;
   const res = await fetch("data/user.json");
   const users = await res.json();
