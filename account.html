@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>アカウント情報</title>
+</head>
+<body>
+
+<script>
+  const user = JSON.parse(localStorage.getItem("loginUser"));
+  if (!user) location.href = "index.html";
+</script>
+
+<h1>アカウント情報</h1>
+
+<p>ユーザーID：<span id="id"></span></p>
+<p>名前：<span id="name"></span></p>
+
+<button onclick="location.href='home.html'">戻る</button>
+
+<script>
+  document.getElementById("id").textContent = user.id;
+  document.getElementById("name").textContent = user.name;
+</script>
+
+</body>
+</html>
