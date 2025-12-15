@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
   <title>意見箱</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<script>
+  // ログインチェック
+  if (!localStorage.getItem("loginUser")) {
+    location.href = "index.html";
+  }
+</script>
+
 <h1>意見箱</h1>
 
-<textarea id="msg" placeholder="ご意見を入力"></textarea>
+<textarea id="message" placeholder="意見を書いてください"></textarea>
 <br>
 <button onclick="sendFeedback()">送信</button>
-<button onclick="location.href='home.html'">戻る</button>
+
+<h2>送信された意見</h2>
+<ul id="feedbackList"></ul>
 
 <script src="feedback.js"></script>
 </body>
 </html>
+
 
