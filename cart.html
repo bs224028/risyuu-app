@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>履修カート</title>
+  <link rel="stylesheet" href="style.css">
+  <title>仮履修一覧</title>
 </head>
 <body>
-  <h1>履修カート</h1>
 
-  <ul id="cartList"></ul>
+<script>
+  if (!localStorage.getItem("loginUser")) {
+    location.href = "index.html";
+  }
+</script>
 
-  <button onclick="goConfirm()">確認画面へ</button>
+<h1>仮履修一覧</h1>
+<ul id="list"></ul>
 
-  <script src="cart.js"></script>
+<button onclick="location.href='kougi-list.html'">戻る</button>
+<button onclick="location.href='confirm.html'">履修確定</button>
+
+<script src="cart.js"></script>
 </body>
 </html>
