@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>投票</title>
+</head>
+<body>
+
+<script>
+  if (!localStorage.getItem("loginUser")) {
+    location.href = "index.html";
+  }
+</script>
+
+<h1>ランキング投票</h1>
+
+<p>1位（5点）</p>
+<select id="rank1"></select>
+
+<p>2位（3点）</p>
+<select id="rank2"></select>
+
+<p>3位（1点）</p>
+<select id="rank3"></select>
+
+<br><br>
+<button onclick="vote()">投票する</button>
+<button onclick="location.href='ranking.html'">戻る</button>
+
+<script src="vote.js"></script>
+</body>
+</html>
