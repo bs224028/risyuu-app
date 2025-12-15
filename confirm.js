@@ -1,18 +1,6 @@
-const confirmList = document.getElementById("confirmList");
-
-function loadConfirm() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  cart.forEach(course => {
-    const li = document.createElement("li");
-    li.textContent = course.name;
-    confirmList.appendChild(li);
-  });
-}
-
-function complete() {
-  // 完了ページ（A担当想定）
+function confirmRegister() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  localStorage.setItem("myKougi", JSON.stringify(cart));
+  localStorage.removeItem("cart");
   location.href = "complete.html";
 }
-
-loadConfirm();
