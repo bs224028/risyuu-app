@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>講義詳細</title>
+</head>
+<body>
+  <h1 id="title"></h1>
+  <p id="teacher"></p>
+  <p id="description"></p>
+
+  <h2>レビュー投稿</h2>
+  <input type="number" id="rate" min="1" max="5" placeholder="評価(1-5)">
+  <br>
+  <textarea id="comment" placeholder="コメント"></textarea>
+  <br>
+  <button onclick="saveReview()">投稿</button>
+
+  <h2>レビュー一覧</h2>
+  <ul id="reviewList"></ul>
+
+  <script src="review.js"></script>
+</body>
+</html>

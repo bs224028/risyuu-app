@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "開発実践演習",
+    "teacher": "喜多義弘",
+    "description": "ソフトウェア開発を学ぶ"
+  },
+  {
+    "id": 2,
+    "name": "民法入門",
+    "teacher": "田畑嘉洋",
+    "description": "民法の基本を学ぶ"
+  },
+  {
+    "id": 3,
+    "name": "統計演習",
+    "teacher":"斎藤正也",
+    "description":"統計学を学ぶ"
+  },
+    {
+    "id": 4,
+    "name": "暗号技術",
+    "teacher":"一色寿幸",
+    "description":"暗号の基本を学ぶ"
+  },
+    {
+    "id": 5,
+    "name": "情報理論",
+    "teacher":"星野文学",
+    "description":"情報について学ぶ"
+  },
+]
