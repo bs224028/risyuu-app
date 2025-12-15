@@ -4,16 +4,20 @@
   <meta charset="UTF-8">
   <title>講義詳細</title>
 </head>
-<button onclick="history.back()">← 講義一覧に戻る</button>
 <body>
+
+  <button onclick="location.href='kougi-list.html'">
+    ← 講義一覧に戻る
+  </button>
+
   <h1 id="title"></h1>
   <p id="teacher"></p>
   <p id="description"></p>
 
   <h2>レビュー投稿</h2>
-  <input type="number" id="rate" min="1" max="5" placeholder="評価(1-5)">
+  <input type="number" id="rate" min="1" max="5">
   <br>
-  <textarea id="comment" placeholder="コメント"></textarea>
+  <textarea id="comment"></textarea>
   <br>
   <button onclick="saveReview()">投稿</button>
 
