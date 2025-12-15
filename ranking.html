@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>人気ランキング</title>
+  <link rel="stylesheet" href="style.css">
+  <title>ランキング</title>
 </head>
 <body>
-  <h1>講義ランキング</h1>
 
-  <ol id="rankingList"></ol>
+<script>
+  if (!localStorage.getItem("loginUser")) {
+    location.href = "index.html";
+  }
+</script>
 
-  <script src="ranking.js"></script>
+<h1>人気講義ランキング</h1>
+<ol id="ranking"></ol>
+
+<button onclick="location.href='home.html'">戻る</button>
+
+<script src="ranking.js"></script>
 </body>
 </html>
