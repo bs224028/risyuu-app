@@ -1,16 +1,15 @@
-const rankingList = document.getElementById("rankingList");
+const list = document.getElementById("ranking");
+const data = JSON.parse(localStorage.getItem("myKougi") || "[]");
 
-function loadRanking() {
-  // 仮データ（後でレビュー平均に置き換え）
-  const courses = JSON.parse(localStorage.getItem("courses")) || [];
+const count = {};
+data.forEach(k => {
+  count[k.name] = (count[k.name] || 0) + 1;
+});
 
-  courses
-    .sort((a, b) => b.review - a.review)
-    .forEach(course => {
-      const li = document.createElement("li");
-      li.textContent = `${course.name}（評価：${course.review}）`;
-      rankingList.appendChild(li);
-    });
-}
-
-loadRanking();
+Object.entries(count)
+  .sort((a, b) => b[1] - a[1])
+  .forEach(([name, c]) => {
+    const li = document.createElement("li");
+    li.textContent = `${name}（${c}人）`;
+    list.appendChild(li);
+  });
