@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
   <title>時間割</title>
 </head>
 <body>
-  <h1>時間割</h1>
 
-  <table border="1" id="timetable">
-    <tr>
-      <th>曜日</th>
-      <th>講義</th>
-    </tr>
-  </table>
+<script>
+  if (!localStorage.getItem("loginUser")) {
+    location.href = "index.html";
+  }
+</script>
 
-  <script src="timetable.js"></script>
+<h1>時間割</h1>
+<table border="1" align="center">
+  <tr>
+    <th>曜日</th><th>講義名</th>
+  </tr>
+  <tbody id="table"></tbody>
+</table>
+
+<button onclick="location.href='home.html'">戻る</button>
+
+<script src="timetable.js"></script>
 </body>
 </html>
