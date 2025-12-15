@@ -1,16 +1,9 @@
-const table = document.getElementById("timetable");
+const table = document.getElementById("table");
+const list = JSON.parse(localStorage.getItem("myKougi") || "[]");
 
-function loadTimetable() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+list.forEach(k => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `<td>${k.day}</td><td>${k.name}</td>`;
+  table.appendChild(tr);
+});
 
-  cart.forEach(course => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${course.day || "未定"}</td>
-      <td>${course.name}</td>
-    `;
-    table.appendChild(tr);
-  });
-}
-
-loadTimetable();
