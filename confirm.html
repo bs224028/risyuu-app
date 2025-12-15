@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>最終確認</title>
+  <link rel="stylesheet" href="style.css">
+  <title>履修確認</title>
 </head>
 <body>
-  <h1>履修登録 最終確認</h1>
 
-  <ul id="confirmList"></ul>
+<script>
+  if (!localStorage.getItem("loginUser")) {
+    location.href = "index.html";
+  }
+</script>
 
-  <button onclick="complete()">登録確定</button>
+<h1>履修を確定しますか？</h1>
 
-  <script src="confirm.js"></script>
+<button onclick="confirmRegister()">確定</button>
+<button onclick="location.href='cart.html'">戻る</button>
+
+<script src="confirm.js"></script>
 </body>
 </html>
