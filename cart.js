@@ -1,31 +1,32 @@
-const cartList = document.getElementById("cartList");
+const list = document.getElementById("list");
 
-function loadCart() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cartList.innerHTML = "";
+function showCart() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  list.innerHTML = "";
 
-  cart.forEach((course, index) => {
+  if (cart.length === 0) {
+    list.innerHTML = "<li>仮履修中の講義はありません</li>";
+    return;
+  }
+
+  cart.forEach((k, index) => {
     const li = document.createElement("li");
-    li.textContent = course.name;
+    li.textContent = k.name + " ";
 
     const btn = document.createElement("button");
     btn.textContent = "削除";
-    btn.onclick = () => removeFromCart(index);
+    btn.onclick = () => removeKougi(index);
 
     li.appendChild(btn);
-    cartList.appendChild(li);
+    list.appendChild(li);
   });
 }
 
-function removeFromCart(index) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(index, 1);
+function removeKougi(index) {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  cart.splice(index, 1);   // 指定位置の講義を削除
   localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
+  showCart();              // 再表示
 }
 
-function goConfirm() {
-  location.href = "confirm.html";
-}
-
-loadCart();
+showCart();
