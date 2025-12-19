@@ -1,44 +1,17 @@
-showFeedback();
+function sendIken() {
+  const text = document.getElementById("iken").value;
 
-function sendFeedback() {
-  const message = document.getElementById("message").value;
-
-  if (message === "") {
+  if (!text) {
     alert("意見を入力してください");
     return;
   }
 
-  const user = JSON.parse(localStorage.getItem("loginUser"));
+  const ikens = JSON.parse(localStorage.getItem("ikens")) || [];
+  ikens.push(text);
+  localStorage.setItem("ikens", JSON.stringify(ikens));
 
-  const feedback = {
-    name: user.name,
-    text: message,
-    date: new Date().toLocaleString()
-  };
-
-  const feedbacks =
-    JSON.parse(localStorage.getItem("feedbacks")) || [];
-
-  feedbacks.push(feedback);
-
-  localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
-
-  document.getElementById("message").value = "";
-
-  showFeedback();
+  alert("意見を送信しました");
+  document.getElementById("iken").value = "";
 }
 
-function showFeedback() {
-  const list = document.getElementById("feedbackList");
-  list.innerHTML = "";
-
-  const feedbacks =
-    JSON.parse(localStorage.getItem("feedbacks")) || [];
-
-  feedbacks.forEach(f => {
-    const li = document.createElement("li");
-    li.textContent = `${f.date}｜${f.name}：${f.text}`;
-    list.appendChild(li);
-  });
-}
 
