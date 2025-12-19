@@ -2,21 +2,27 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>ログイン</title>
+  <title>会員登録</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-  <h1>履修登録システム</h1>
+  <h1>会員登録</h1>
 
   <input id="id" placeholder="ユーザーID">
+  <input id="name" placeholder="名前">
   <input id="password" type="password" placeholder="パスワード">
 
-  <button onclick="login()">ログイン</button>
+  <button onclick="register()">登録</button>
+
+  <p>
+    すでに登録済み？
+    <a href="login.html">ログインへ</a>
+  </p>
 </div>
 
-<script src="login.js"></script>
+<script src="register.js"></script>
 </body>
 </html>
 
