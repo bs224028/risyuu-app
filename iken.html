@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>意見箱</title>
@@ -7,24 +7,18 @@
 </head>
 <body>
 
-<script>
-  // ログインチェック
-  if (!localStorage.getItem("loginUser")) {
-    location.href = "index.html";
-  }
-</script>
+<div class="container">
+  <h1>意見箱</h1>
 
-<h1>意見箱</h1>
+  <textarea id="iken" placeholder="意見を入力してください"></textarea>
+  <button onclick="sendIken()">送信</button>
 
-<textarea id="message" placeholder="意見を書いてください"></textarea>
-<br>
-<button onclick="sendFeedback()">送信</button>
+  <button onclick="location.href='home.html'">戻る</button>
+</div>
 
-<h2>送信された意見</h2>
-<ul id="feedbackList"></ul>
-
-<script src="feedback.js"></script>
+<script src="iken.js"></script>
 </body>
 </html>
+
 
 
