@@ -2,8 +2,12 @@ async function login() {
   const id = document.getElementById("id").value;
   const pw = document.getElementById("password").value;
 
-  const res = await fetch("user.json");
-  const users = await res.json();
+  let users = JSON.parse(localStorage.getItem("users"));
+
+  if (!users) {
+    const res = await fetch("user.json");
+    users = await res.json();
+  }
 
   const user = users.find(u => u.id === id && u.password === pw);
 
