@@ -7,7 +7,7 @@ async function loadKougi() {
   const res = await fetch("data/kougi.json");
   const kougiList = await res.json();
 
-  // 「選択してください」を最初に入れる
+  // 「選択してください」を追加
   [r1, r2, r3].forEach(sel => {
     const def = document.createElement("option");
     def.value = "";
@@ -15,12 +15,12 @@ async function loadKougi() {
     sel.appendChild(def);
   });
 
-  // 講義をプルダウンに追加
+  // 講義名だけを選択肢にする
   kougiList.forEach(k => {
     [r1, r2, r3].forEach(sel => {
       const opt = document.createElement("option");
-      opt.value = k.id;
-      opt.textContent = k.name;
+      opt.value = k.name;        // ★ nameだけ使う
+      opt.textContent = k.name; // 表示もname
       sel.appendChild(opt);
     });
   });
@@ -45,11 +45,11 @@ function vote() {
   // 投票データ取得
   const votes = JSON.parse(localStorage.getItem("votes") || "[]");
 
-  // 点数を追加
+  // 講義名＋点数で保存
   votes.push(
-    { id: r1.value, point: 5 },
-    { id: r2.value, point: 3 },
-    { id: r3.value, point: 1 }
+    { name: r1.value, point: 5 },
+    { name: r2.value, point: 3 },
+    { name: r3.value, point: 1 }
   );
 
   localStorage.setItem("votes", JSON.stringify(votes));
