@@ -4,7 +4,7 @@ const r3 = document.getElementById("rank3");
 
 // 講義データ読み込み
 async function loadKougi() {
-  const res = await fetch("data/kougi.json");
+  const res = await fetch("./data/kougi.json"";
   const kougiList = await res.json();
 
   // 「選択してください」を追加
