@@ -12,26 +12,21 @@ function sendIken() {
 
   const ikens = JSON.parse(localStorage.getItem("ikens")) || [];
 
-  const userName =
-    loginUser.role === "管理者"
-      ? loginUser.username
-      : loginUser.id;
-
   ikens.push({
-  　id: Date.now(),
-  　userId: loginUser.role ? "admin" : loginUser.id,
- 　 userName: loginUser.role ? loginUser.username : loginUser.id,
-  　message: text,
-  　date: new Date().toLocaleDateString(),
-  　reply: ""
-　});
-
+    id: Date.now(),
+    userId: loginUser.role ? "admin" : loginUser.id, // ← 識別用
+    userName: loginUser.role ? loginUser.username : loginUser.id, // ← 表示用
+    message: text,
+    date: new Date().toLocaleDateString(),
+    reply: ""
+  });
 
   localStorage.setItem("ikens", JSON.stringify(ikens));
 
   alert("意見を送信しました");
   document.getElementById("iken").value = "";
 }
+
 
 
 
