@@ -10,13 +10,30 @@
       window.location.href = "login.html";
     }
   </script>
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+    }
+    th {
+      background-color: #eef;
+      width: 30%;
+      text-align: left;
+    }
+  </style>
 </head>
 
 <body>
 
   <h1>講義詳細</h1>
 
-  <p id="detail"></p>
+  <div id="detail"></div>
 
   <button onclick="history.back()">一覧に戻る</button>
 
@@ -24,23 +41,43 @@
     const params = new URLSearchParams(location.search);
     const id = params.get("id");
 
-    let text = "";
+    let html = "";
 
     if (id === "1") {
-      text = "開発実践演習：ソフトウェア開発を学ぶ";
-    } else if (id === "2") {
-      text = "民法入門：民法の基本を学ぶ";
-    } else if (id === "3") {
-      text = "統計演習：統計学を学ぶ";
-    } else if (id === "4") {
-      text = "暗号技術：暗号の基本を学ぶ";
-    } else if (id === "5") {
-      text = "情報理論：情報について学ぶ";
+      html = `
+        <h2>開発実践演習</h2>
+
+        <table>
+          <tr><th>ナンバリング</th><td>S2-SOF201-1</td></tr>
+          <tr><th>担当教員</th><td>喜多 義弘</td></tr>
+          <tr><th>対象学年</th><td>2年</td></tr>
+          <tr><th>クラス</th><td>情報セキュリティ学科</td></tr>
+          <tr><th>講義室</th><td>W203 情報演習室3</td></tr>
+          <tr><th>開講時期</th><td>後期</td></tr>
+          <tr><th>曜日・時限</th><td>月4</td></tr>
+          <tr><th>単位区分</th><td>必修</td></tr>
+          <tr><th>単位数</th><td>2</td></tr>
+        </table>
+
+        <h3>授業概要・テーマ</h3>
+        <p>
+          数名のチームで協働してプログラムを開発する。
+          合議による仕様決定、作業分担、進捗管理、
+          結合テストのスケジューリングなど、
+          協働開発に伴う作業を経験する。
+        </p>
+
+        <h3>到達目標</h3>
+        <p>
+          協働作業によるソフトウェア開発を経験して、
+          協働作業における留意点を体感する。
+        </p>
+      `;
     } else {
-      text = "講義が見つかりません";
+      html = "<p>この講義の詳細は準備中です。</p>";
     }
 
-    document.getElementById("detail").textContent = text;
+    document.getElementById("detail").innerHTML = html;
   </script>
 
 </body>
