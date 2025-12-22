@@ -1,29 +1,38 @@
+// セレクトボックス取得
 const r1 = document.getElementById("rank1");
 const r2 = document.getElementById("rank2");
 const r3 = document.getElementById("rank3");
 
-// 講義データ読み込み
+// 講義データを読み込んで選択肢に追加
 async function loadKougi() {
-  const res = await fetch("./data/kougi.json"";
-  const kougiList = await res.json();
+  try {
+    const res = await fetch("./data/kougi.json"); // ← GitHub Pages対応
+    if (!res.ok) throw new Error("kougi.json が見つかりません");
 
-  // 「選択してください」を追加
-  [r1, r2, r3].forEach(sel => {
-    const def = document.createElement("option");
-    def.value = "";
-    def.textContent = "-- 選択してください --";
-    sel.appendChild(def);
-  });
+    const kougiList = await res.json();
 
-  // 講義名だけを選択肢にする
-  kougiList.forEach(k => {
+    // 初期選択肢
     [r1, r2, r3].forEach(sel => {
-      const opt = document.createElement("option");
-      opt.value = k.name;        // ★ nameだけ使う
-      opt.textContent = k.name; // 表示もname
-      sel.appendChild(opt);
+      const def = document.createElement("option");
+      def.value = "";
+      def.textContent = "-- 選択してください --";
+      sel.appendChild(def);
     });
-  });
+
+    // 講義名を追加
+    kougiList.forEach(k => {
+      [r1, r2, r3].forEach(sel => {
+        const opt = document.createElement("option");
+        opt.value = k.name;
+        opt.textContent = k.name;
+        sel.appendChild(opt);
+      });
+    });
+
+  } catch (e) {
+    alert("講義データを読み込めません");
+    console.error(e);
+  }
 }
 
 // 投票処理
@@ -42,10 +51,10 @@ function vote() {
     return;
   }
 
-  // 投票データ取得
+  // 既存投票取得
   const votes = JSON.parse(localStorage.getItem("votes") || "[]");
 
-  // 講義名＋点数で保存
+  // 投票追加
   votes.push(
     { name: r1.value, point: 5 },
     { name: r2.value, point: 3 },
@@ -58,4 +67,5 @@ function vote() {
   location.href = "ranking.html";
 }
 
+// ページ読み込み時に実行
 loadKougi();
