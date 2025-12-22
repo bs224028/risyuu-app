@@ -3,15 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>講義一覧</title>
+
+  <!-- ログインチェック -->
+  <script>
+    if (!localStorage.getItem("loginUser")) {
+      window.location.href = "login.html";
+    }
+  </script>
 </head>
+
 <body>
 
   <h1>講義一覧</h1>
 
-  <button onclick="history.back()">戻る</button>
+  <!-- ホームに戻るボタン -->
+  <button onclick="location.href='home.html'">
+    ホームに戻る
+  </button>
 
-  <ul id="kougiList"></ul>
+  <hr>
 
-  <script src="main.js"></script>
+  
+  <ul>
+    <li>第1回 オリエンテーション</<ｎ/
+    <li>第2回 HTML基礎</li>
+    <li>第3回 JavaScript基礎</li>
+  </ul>
+
 </body>
 </html>
