@@ -3,27 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>講義詳細</title>
+
+  <!-- ログインチェック -->
+  <script>
+    if (!localStorage.getItem("loginUser")) {
+      window.location.href = "login.html";
+    }
+  </script>
 </head>
+
 <body>
 
-  <button onclick="location.href='kougi-list.html'">
-    ← 講義一覧に戻る
-  </button>
+  <h1>講義詳細</h1>
 
-  <h1 id="title"></h1>
-  <p id="teacher"></p>
-  <p id="description"></p>
+  <div id="detail"></div>
 
-  <h2>レビュー投稿</h2>
-  <input type="number" id="rate" min="1" max="5">
-  <br>
-  <textarea id="comment"></textarea>
-  <br>
-  <button onclick="saveReview()">投稿</button>
+  <button onclick="history.back()">一覧に戻る</button>
 
-  <h2>レビュー一覧</h2>
-  <ul id="reviewList"></ul>
+  <script>
+    // URLからidを取得
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
 
-  <script src="review.js"></script>
+    let text = "";
+
+    if (id === "1") {
+      text = "第1回：オリエンテーション\nこの講義では全体説明を行います。";
+    } else if (id === "2") {
+      text = "第2回：HTML基礎\nHTMLの基本構造を学びます。";
+    } else if (id === "3") {
+      text = "第3回：JavaScript基礎\nJavaScriptの基礎文法を学びます。";
+    } else {
+      text = "講義が見つかりません。";
+    }
+
+    document.getElementById("detail").innerText = text;
+  </script>
+
 </body>
 </html>
