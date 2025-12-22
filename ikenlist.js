@@ -11,7 +11,7 @@ ikens.forEach(i => {
     <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
   `;
 
-  if (loginUser && loginUser.role === "admin") {
+  if (loginUser && loginUser.role === "管理者") {
     const input = document.createElement("input");
     input.value = i.reply;
     input.placeholder = "管理者返信";
@@ -32,4 +32,5 @@ ikens.forEach(i => {
 
   list.appendChild(div);
 });
+
 
