@@ -13,29 +13,18 @@
 </head>
 
 <body>
+
   <h1>講義一覧</h1>
 
   <button onclick="location.href='home.html'">ホームに戻る</button>
 
-  <ul id="kougiList"></ul>
+  <ul>
+    <li><a href="kougi-detail.html?id=1">開発実践演習</a></li>
+    <li><a href="kougi-detail.html?id=2">民法入門</a></li>
+    <li><a href="kougi-detail.html?id=3">統計演習</a></li>
+    <li><a href="kougi-detail.html?id=4">暗号技術</a></li>
+    <li><a href="kougi-detail.html?id=5">情報理論</a></li>
+  </ul>
 
-  <script>
-    fetch("data/kougi.json")
-      .then(response => response.json())
-      .then(data => {
-        const list = document.getElementById("kougiList");
-
-        data.forEach(kougi => {
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-
-          a.href = `kougi-detail.html?id=${kougi.id}`;
-          a.textContent = kougi.name;
-
-          li.appendChild(a);
-          list.appendChild(li);
-        });
-      });
-  </script>
 </body>
 </html>
