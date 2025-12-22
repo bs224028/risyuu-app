@@ -4,7 +4,7 @@ if (!loginUser) {
 }
 
 function sendIken() {
-  const text = document.getElementById("ikenText").value.trim();
+  const text = document.getElementById("iken").value.trim();
   if (!text) {
     alert("意見を入力してください");
     return;
@@ -28,7 +28,8 @@ function sendIken() {
   localStorage.setItem("ikens", JSON.stringify(ikens));
 
   alert("意見を送信しました");
-  document.getElementById("ikenText").value = "";
+  document.getElementById("iken").value = "";
 }
+
 
 
