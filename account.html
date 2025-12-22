@@ -16,8 +16,12 @@
 
 <script>
   const user = JSON.parse(localStorage.getItem("loginUser"));
+
+  const id = user.id ?? "admin";
+  const name = user.name ?? user.username;
+
   document.getElementById("info").textContent =
-    "ユーザーID：" + user.id + " / 名前：" + user.name;
+    "ユーザーID：" + id + " / 名前：" + name;
 </script>
 
 </body>
