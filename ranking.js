@@ -1,41 +1,31 @@
-const ranking = document.getElementById("ranking");
-let kougiList = [];
+const list = document.getElementById("ranking");
 
-// 講義一覧を読み込む
-async function load() {
-  const res = await fetch("data/kougi.json");
-  kougiList = await res.json();
-  showRanking();
-}
+// 投票データ取得
+const votes = JSON.parse(localStorage.getItem("votes") || "[]");
 
-function showRanking() {
-  const votes = JSON.parse(localStorage.getItem("votes") || "[]");
-  const score = {};
+// 得点集計
+const score = {};
 
-  votes.forEach(v => {
-    score[v.id] = (score[v.id] || 0) + v.point;
-  });
-
-  const sorted = Object.entries(score)
-    .map(([id, point]) => {
-      const k = kougiList.find(x => x.id == id);
-      return { name: k.name, point };
-    })
-    .sort((a, b) => b.point - a.point)
-    .slice(0, 3);
-
-  ranking.innerHTML = "";
-
-  if (sorted.length === 0) {
-    ranking.innerHTML = "<li>まだ投票がありません</li>";
-    return;
+votes.forEach(v => {
+  if (!score[v.name]) {
+    score[v.name] = 0;
   }
+  score[v.name] += v.point;
+});
 
-  sorted.forEach(r => {
-    const li = document.createElement("li");
-    li.textContent = `${r.name}（${r.point}点）`;
-    ranking.appendChild(li);
-  });
+// 配列に変換してソート
+const ranking = Object.entries(score)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 3);
+
+// 表示
+ranking.forEach((r, i) => {
+  const li = document.createElement("li");
+  li.textContent = `${i + 1}位：${r[0]}（${r[1]}点）`;
+  list.appendChild(li);
+});
+
+// 投票がない場合
+if (ranking.length === 0) {
+  list.innerHTML = "<li>まだ投票がありません</li>";
 }
-
-load();
