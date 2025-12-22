@@ -1,5 +1,9 @@
-const ikens = JSON.parse(localStorage.getItem("ikens")) || [];
 const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+if (!loginUser) {
+  location.href = "login.html";
+}
+
+const ikens = JSON.parse(localStorage.getItem("ikens")) || [];
 const list = document.getElementById("ikenList");
 
 ikens.forEach(i => {
@@ -8,18 +12,23 @@ ikens.forEach(i => {
   div.innerHTML = `
     <p><strong>${i.user}</strong>（${i.date}）</p>
     <p>${i.message}</p>
-    <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
+    <p><strong>管理者返信：</strong>${i.reply ? i.reply : "未回答"}</p>
   `;
 
-  if (loginUser && loginUser.role === "管理者") {
+  if (loginUser.role === "管理者") {
     const input = document.createElement("input");
-    input.value = i.reply;
-    input.placeholder = "管理者返信";
+    input.type = "text";
+    input.placeholder = "管理者返信を入力";
+    input.value = i.reply || "";
 
     const btn = document.createElement("button");
     btn.textContent = "返信";
 
     btn.onclick = () => {
+      if (!input.value) {
+        alert("返信内容を入力してください");
+        return;
+      }
       i.reply = input.value;
       localStorage.setItem("ikens", JSON.stringify(ikens));
       alert("返信を保存しました");
