@@ -16,28 +16,31 @@
 
   <h1>講義詳細</h1>
 
-  <div id="detail"></div>
+  <p id="detail"></p>
 
   <button onclick="history.back()">一覧に戻る</button>
 
   <script>
-    // URLからidを取得
     const params = new URLSearchParams(location.search);
     const id = params.get("id");
 
     let text = "";
 
     if (id === "1") {
-      text = "第1回：オリエンテーション\nこの講義では全体説明を行います。";
+      text = "開発実践演習：ソフトウェア開発を学ぶ";
     } else if (id === "2") {
-      text = "第2回：HTML基礎\nHTMLの基本構造を学びます。";
+      text = "民法入門：民法の基本を学ぶ";
     } else if (id === "3") {
-      text = "第3回：JavaScript基礎\nJavaScriptの基礎文法を学びます。";
+      text = "統計演習：統計学を学ぶ";
+    } else if (id === "4") {
+      text = "暗号技術：暗号の基本を学ぶ";
+    } else if (id === "5") {
+      text = "情報理論：情報について学ぶ";
     } else {
-      text = "講義が見つかりません。";
+      text = "講義が見つかりません";
     }
 
-    document.getElementById("detail").innerText = text;
+    document.getElementById("detail").textContent = text;
   </script>
 
 </body>
