@@ -18,12 +18,14 @@ function sendIken() {
       : loginUser.id;
 
   ikens.push({
-    id: Date.now(),
-    user: userName,
-    message: text,
-    date: new Date().toLocaleDateString(),
-    reply: ""
-  });
+  　id: Date.now(),
+  　userId: loginUser.role ? "admin" : loginUser.id,
+ 　 userName: loginUser.role ? loginUser.username : loginUser.id,
+  　message: text,
+  　date: new Date().toLocaleDateString(),
+  　reply: ""
+　});
+
 
   localStorage.setItem("ikens", JSON.stringify(ikens));
 
