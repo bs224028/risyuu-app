@@ -17,18 +17,25 @@
 
   <button onclick="location.href='home.html'">ホームに戻る</button>
 
-  <hr>
+  <ul id="kougiList"></ul>
 
-  <ul>
-    <li>
-      <a href="kougi-detail.html?id=1">第1回 オリエンテーション</a>
-    </li>
-    <li>
-      <a href="kougi-detail.html?id=2">第2回 HTML基礎</a>
-    </li>
-    <li>
-      <a href="kougi-detail.html?id=3">第3回 JavaScript基礎</a>
-    </li>
-  </ul>
+  <script>
+    fetch("data/kougi.json")
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById("kougiList");
+
+        data.forEach(kougi => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+
+          a.href = `kougi-detail.html?id=${kougi.id}`;
+          a.textContent = kougi.name;
+
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      });
+  </script>
 </body>
 </html>
