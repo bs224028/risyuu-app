@@ -5,14 +5,18 @@ if (!loginUser) {
 
 const ikens = JSON.parse(localStorage.getItem("ikens")) || [];
 const list = document.getElementById("ikenList");
+list.innerHTML = "";
 
-list.innerHTML = ""; 
+function canDelete(iken) {
+  if (loginUser.role === "管理者") return true;
+  return iken.userId === loginUser.id;
+}
 
 ikens.forEach((i, index) => {
   const div = document.createElement("div");
 
   div.innerHTML = `
-    <p><strong>${i.user}</strong>（${i.date}）</p>
+    <p><strong>${i.userName}</strong>（${i.date}）</p>
     <p>${i.message}</p>
     <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
   `;
@@ -35,13 +39,7 @@ ikens.forEach((i, index) => {
     div.appendChild(replyBtn);
   }
 
-
-  const loginName =
-    loginUser.role === "管理者"
-      ? loginUser.username
-      : loginUser.id;
-
-  if (loginUser.role === "管理者" || i.user === loginName) {
+  if (canDelete(i)) {
     const delBtn = document.createElement("button");
     delBtn.textContent = "削除";
     delBtn.style.marginLeft = "10px";
@@ -59,6 +57,7 @@ ikens.forEach((i, index) => {
 
   list.appendChild(div);
 });
+
 
 
 
