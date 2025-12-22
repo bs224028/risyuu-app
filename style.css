@@ -30,3 +30,9 @@ button {
 button:hover {
   background: #1565c0;
 }
+
+#ikenList div {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
