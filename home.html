@@ -15,7 +15,8 @@
 
 <div class="container">
   <h1>ホーム</h1>
-
+  <p id="welcome"></p>
+  
   <button onclick="location.href='timetable.html'">時間割</button> 
   <button onclick="location.href='kougi-list.html'">講義一覧</button>
 　<button onclick="location.href='ranking.html'">ランキング</button>
@@ -27,6 +28,10 @@
 </div>
 
 <script>
+  const u = JSON.parse(localStorage.getItem("loginUser"));
+  document.getElementById("welcome").textContent =
+    `ようこそ ${u.name ?? u.username} さん`;
+  
   function logout() {
     localStorage.removeItem("loginUser");
     window.location.href = "index.html";
