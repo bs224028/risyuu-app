@@ -1,3 +1,4 @@
+ikens.sort((a, b) => b.id - a.id);
 const loginUser = JSON.parse(localStorage.getItem("loginUser"));
 if (!loginUser) {
   location.href = "login.html";
@@ -20,7 +21,12 @@ ikens.forEach((i, index) => {
     <p>${i.message}</p>
     <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
   `;
-
+　if (i.userId === loginUser.id && !loginUser.role) {
+    const mark = document.createElement("span");
+    mark.textContent = "（あなたの投稿）";
+    mark.style.color = "green";
+    div.prepend(mark);
+  }
   if (loginUser.role === "管理者") {
     const input = document.createElement("input");
     input.value = i.reply || "";
