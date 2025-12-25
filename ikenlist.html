@@ -9,23 +9,24 @@
 
 <div class="container list-container">
 
-  <h2>意見一覧</h2>
+<h2>意見一覧</h2>
 
-  <div class="controls">
-    <select id="sortSelect" onchange="sortIkens()">
-      <option value="new">新しい順</option>
-      <option value="old">古い順</option>
-    </select>
+<div class="controls">
+  <select id="sortSelect" onchange="sortIkens()">
+    <option value="new">新しい順</option>
+    <option value="old">古い順</option>
+  </select>
 
-    <select id="filtercategory" onchange="filterIken()">
-      <option value="">すべて表示</option>
-      <option value="改善依頼">改善依頼</option>
-      <option value="追加希望">追加希望</option>
-      <option value="その他">その他</option>
-    </select>
-  </div>
+  <select id="filtercategory" onchange="filterIken()">
+    <option value="">すべて表示</option>
+    <option value="改善依頼">改善依頼</option>
+    <option value="追加希望">追加希望</option>
+    <option value="その他">その他</option>
+  </select>
+</div>
 
-  <div id="ikenList"></div>
+<div id="ikenList"></div>
+
 
   <button onclick="location.href='home.html'">ホームへ戻る</button>
 
