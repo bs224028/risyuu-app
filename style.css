@@ -1,6 +1,8 @@
 body {
   font-family: sans-serif;
   background: #f4f6f8;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -9,33 +11,54 @@ body {
   background: white;
   padding: 20px;
   border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-input, textarea {
+h1, h2 {
+  margin-top: 0;
+}
+
+input, textarea, select {
   width: 100%;
   padding: 8px;
   margin: 8px 0;
+  box-sizing: border-box;
 }
 
 button {
   width: 100%;
   padding: 10px;
-  margin-top: 5px;
+  margin-top: 6px;
   background: #1976d2;
   color: white;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 button:hover {
   background: #1565c0;
 }
 
-#ikenList div {
+#ikenList {
+  margin-top: 10px;
+}
+
+#ikenList > div {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
+
+#ikenList input {
+  margin-top: 6px;
+}
+.container button + button {
+  margin-top: 8px;
+}
+
 
 
 
