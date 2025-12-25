@@ -1,113 +1,79 @@
-const lastSeen = Number(localStorage.getItem("lastSeenIkenTime") || 0);
 const loginUser = JSON.parse(localStorage.getItem("loginUser"));
-if (!loginUser) {
-  location.href = "login.html";
+if (!loginUser) location.href = "login.html";
+
+let ikens = JSON.parse(localStorage.getItem("ikens")) || [];
+
+function isNew(date){
+  const today = new Date().toLocaleDateString();
+  return date === today;
 }
 
-const ikens = JSON.parse(localStorage.getItem("ikens")) || [];
+function drawList(data){
+  const list = document.getElementById("ikenList");
+  list.innerHTML = "";
 
-ikens.sort((a, b) => b.id - a.id);
+  data.forEach((i, index) => {
+    const card = document.createElement("div");
+    card.className = "iken-card";
 
-const list = document.getElementById("ikenList");
-list.innerHTML = "";
+    if(i.userId === loginUser.id) card.classList.add("my-post");
 
-function canDelete(iken) {
-  if (loginUser.role === "管理者") return true;
-  return iken.userId === loginUser.id;
-}
+    const header = document.createElement("div");
+    header.className = "iken-header";
 
-ikens.forEach((i, index) => {
-  const div = document.createElement("div");
-  if (i.id > lastSeen) {
-    const newMark = document.createElement("span");
-    newMark.textContent = " NEW!";
-    newMark.style.color = "red";
-    newMark.style.fontWeight = "bold";
-    div.appendChild(newMark);
-  }
+    const user = document.createElement("span");
+    user.className = "iken-user";
+    user.textContent = i.userId;
 
-
-  const displayUser = i.userId;
-
-  div.innerHTML = `
-    <p>【${i.category}】 <strong>${displayUser}</strong>（${i.date}）</p>
-    <p>${i.message}</p>
-    <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
-  `;
-
-
-  if (i.userId === loginUser.id && !loginUser.role) {
-    const mark = document.createElement("span");
-    mark.textContent = "（あなたの投稿）";
-    mark.style.color = "green";
-    div.prepend(mark);
-  }
-
-  if (loginUser.role === "管理者") {
-    const input = document.createElement("input");
-    input.value = i.reply || "";
-    input.placeholder = "管理者返信";
-
-    const replyBtn = document.createElement("button");
-    replyBtn.textContent = "返信";
-
-    replyBtn.onclick = () => {
-      i.reply = input.value;
-      localStorage.setItem("ikens", JSON.stringify(ikens));
-      location.reload();
-    };
-
-    div.appendChild(input);
-    div.appendChild(replyBtn);
-  }
-
-  if (canDelete(i)) {
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "削除";
-    delBtn.style.marginLeft = "10px";
-
-    delBtn.onclick = () => {
-      if (confirm("この意見を削除しますか？")) {
-        ikens.splice(index, 1);
-        localStorage.setItem("ikens", JSON.stringify(ikens));
-        location.reload();
-      }
-    };
-
-    div.appendChild(delBtn);
-  }
-
-  list.appendChild(div);
-  localStorage.setItem("lastSeenIkenTime", Date.now());
-  
-  function filterIken() {
-    const selected = document.getElementById("filterCategory").value;
-    const cards = document.querySelectorAll("#ikenList > div");
-
-    cards.forEach(card => {
-      const text = card.querySelector("p").textContent;
-      card.style.display = selected && !text.includes(`【${selected}】`)
-        ? "none"
-        : "block";
-    });
-  }
-
-  function sortIkens() {
-    const mode = document.getElementById("sortSelect").value;
-
-    if (mode === "new") {
-      ikens.sort((a, b) => b.id - a.id);
-    } else {
-      ikens.sort((a, b) => a.id - b.id);
+    if(isNew(i.date)){
+      const mark = document.createElement("span");
+      mark.textContent = " NEW";
+      mark.className = "new-mark";
+      user.appendChild(mark);
     }
 
-    localStorage.setItem("ikens", JSON.stringify(ikens));
-    location.reload();
+    const date = document.createElement("span");
+    date.className = "iken-date";
+    date.textContent = i.date;
+
+    header.appendChild(user);
+    header.appendChild(date);
+
+    card.appendChild(header);
+    card.innerHTML += `
+      <p>【${i.category}】</p>
+      <p>${i.message}</p>
+      <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
+    `;
+
+    list.appendChild(card);
+  });
+}
+
+function sortIkens(){
+  const type = document.getElementById("sortSelect").value;
+
+  if(type === "new"){
+    ikens.sort((a,b) => b.id - a.id);
+  } else {
+    ikens.sort((a,b) => a.id - b.id);
   }
 
+  filterIken();
+}
 
-});
+function filterIken(){
+  const cat = document.getElementById("filtercategory").value;
+  let filtered = ikens;
 
+  if(cat){
+    filtered = ikens.filter(i => i.category === cat);
+  }
+
+  drawList(filtered);
+}
+
+sortIkens();
 
 
 
