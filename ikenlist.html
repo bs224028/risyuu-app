@@ -9,6 +9,13 @@
 
 <div class="container">
   <h2>意見一覧</h2>
+  
+  <select id="filtercategory" onchange="filterIken()">
+    <option value="">すべて表示</option>
+    <option value="改善依頼">改善依頼</option>
+    <option value="追加希望">追加希望</option>
+    <option value="その他">その他</option>
+　</select>
 
   <div id="ikenList"></div>
 
