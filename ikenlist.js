@@ -1,3 +1,4 @@
+const lastSeen = Number(localStorage.getItem("lastSeenIkenTime") || 0);
 const loginUser = JSON.parse(localStorage.getItem("loginUser"));
 if (!loginUser) {
   location.href = "login.html";
@@ -66,6 +67,8 @@ ikens.forEach((i, index) => {
   }
 
   list.appendChild(div);
+  localStorage.setItem("lastSeenIkenTime", Date.now());
+
 });
 
 
