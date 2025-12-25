@@ -27,11 +27,14 @@ ikens.forEach((i, index) => {
   }
 
 
+  const displayUser = i.userId;
+
   div.innerHTML = `
-    <p>【${i.category}】 <strong>${i.userName}</strong>（${i.date}）</p>
+    <p>【${i.category}】 <strong>${displayUser}</strong>（${i.date}）</p>
     <p>${i.message}</p>
     <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
   `;
+
 
   if (i.userId === loginUser.id && !loginUser.role) {
     const mark = document.createElement("span");
