@@ -4,8 +4,7 @@ if (!loginUser) location.href = "login.html";
 let ikens = JSON.parse(localStorage.getItem("ikens")) || [];
 
 function isNew(date) {
-  const today = new Date().toLocaleDateString();
-  return date === today;
+  return date === new Date().toLocaleDateString();
 }
 
 function canDelete(iken) {
@@ -25,40 +24,20 @@ function drawList(data) {
       card.classList.add("my-post");
     }
 
-    const header = document.createElement("div");
-    header.className = "iken-header";
-
-    const user = document.createElement("span");
-    user.className = "iken-user";
-    user.textContent = i.userId;
-
-    if (isNew(i.date)) {
-      const mark = document.createElement("span");
-      mark.className = "new-mark";
-      mark.textContent = " NEW";
-      user.appendChild(mark);
-    }
-
-    const date = document.createElement("span");
-    date.className = "iken-date";
-    date.textContent = i.date;
-
-    header.appendChild(user);
-    header.appendChild(date);
-    card.appendChild(header);
-
-    const body = document.createElement("div");
-    body.innerHTML = `
+    card.innerHTML = `
+      <div class="iken-header">
+        <span class="iken-user">${i.userId}${isNew(i.date) ? '<span class="new-mark"> NEW</span>' : ''}</span>
+        <span class="iken-date">${i.date}</span>
+      </div>
       <p>【${i.category}】</p>
       <p>${i.message}</p>
       <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
     `;
-    card.appendChild(body);
 
     if (loginUser.role === "管理者") {
       const input = document.createElement("input");
-      input.placeholder = "返信を入力";
       input.value = i.reply || "";
+      input.placeholder = "返信を入力";
 
       const replyBtn = document.createElement("button");
       replyBtn.textContent = "返信";
@@ -66,7 +45,7 @@ function drawList(data) {
       replyBtn.onclick = () => {
         i.reply = input.value;
         localStorage.setItem("ikens", JSON.stringify(ikens));
-        location.reload();
+        drawList(data);
       };
 
       card.appendChild(input);
@@ -80,7 +59,7 @@ function drawList(data) {
         if (confirm("削除しますか？")) {
           ikens.splice(index, 1);
           localStorage.setItem("ikens", JSON.stringify(ikens));
-          location.reload();
+          drawList(data);
         }
       };
       card.appendChild(delBtn);
@@ -92,21 +71,14 @@ function drawList(data) {
 
 function sortIkens() {
   const type = document.getElementById("sortSelect").value;
-  if (type === "new") {
-    ikens.sort((a, b) => b.id - a.id);
-  } else {
-    ikens.sort((a, b) => a.id - b.id);
-  }
+  ikens.sort((a, b) => type === "new" ? b.id - a.id : a.id - b.id);
   filterIken();
 }
 
 function filterIken() {
   const cat = document.getElementById("filtercategory").value;
-  let filtered = ikens;
-  if (cat) {
-    filtered = ikens.filter(i => i.category === cat);
-  }
-  drawList(filtered);
+  const result = cat ? ikens.filter(i => i.category === cat) : ikens;
+  drawList(result);
 }
 
 sortIkens();
