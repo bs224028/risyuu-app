@@ -8,26 +8,31 @@ function isNew(date) {
 }
 
 function canDelete(iken) {
-  return loginUser.role === "管理者" || iken.userId === loginUser.id;
+  if (loginUser.role === "管理者") return true;
+  return iken.userId === loginUser.id;
 }
 
-function drawList(data) {
+function drawList() {
   const list = document.getElementById("ikenList");
   list.innerHTML = "";
 
-  data.forEach((i, index) => {
+  const cat = document.getElementById("filtercategory").value;
+  let data = cat ? ikens.filter(i => i.category === cat) : [...ikens];
+
+  const type = document.getElementById("sortSelect").value;
+  data.sort((a, b) => type === "new" ? b.id - a.id : a.id - b.id);
+
+  data.forEach((i) => {
     const card = document.createElement("div");
     card.className = "iken-card";
 
-    if (i.userId === loginUser.id && loginUser.role !== "管理者") {
+    if (i.userId === loginUser.id && !loginUser.role) {
       card.classList.add("my-post");
     }
 
     card.innerHTML = `
       <div class="iken-header">
-        <span class="iken-user">
-          ${i.userId}${isNew(i.date) ? '<span class="new-mark"> NEW</span>' : ''}
-        </span>
+        <span class="iken-user">${i.userId}${isNew(i.date) ? '<span class="new-mark"> NEW</span>' : ''}</span>
         <span class="iken-date">${i.date}</span>
       </div>
       <p>【${i.category}】</p>
@@ -35,6 +40,7 @@ function drawList(data) {
       <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
     `;
 
+  
     if (loginUser.role === "管理者") {
       const input = document.createElement("input");
       input.value = i.reply || "";
@@ -44,14 +50,16 @@ function drawList(data) {
       replyBtn.textContent = "返信";
 
       replyBtn.onclick = () => {
-        i.reply = input.value;
+        const target = ikens.find(x => x.id === i.id);
+        target.reply = input.value;
         localStorage.setItem("ikens", JSON.stringify(ikens));
-        drawList(data);
+        drawList();
       };
 
       card.appendChild(input);
       card.appendChild(replyBtn);
     }
+
 
     if (canDelete(i)) {
       const delBtn = document.createElement("button");
@@ -59,9 +67,9 @@ function drawList(data) {
 
       delBtn.onclick = () => {
         if (confirm("削除しますか？")) {
-          ikens.splice(index, 1);
+          ikens = ikens.filter(x => x.id !== i.id);
           localStorage.setItem("ikens", JSON.stringify(ikens));
-          drawList(data);
+          drawList();
         }
       };
 
@@ -72,19 +80,11 @@ function drawList(data) {
   });
 }
 
-function sortIkens() {
-  const type = document.getElementById("sortSelect").value;
-  ikens.sort((a, b) => type === "new" ? b.id - a.id : a.id - b.id);
-  filterIken();
-}
+function sortIkens() { drawList(); }
+function filterIken() { drawList(); }
 
-function filterIken() {
-  const cat = document.getElementById("filtercategory").value;
-  const result = cat ? ikens.filter(i => i.category === cat) : ikens;
-  drawList(result);
-}
+drawList();
 
-sortIkens();
 
 
 
