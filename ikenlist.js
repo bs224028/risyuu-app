@@ -76,6 +76,18 @@ ikens.forEach((i, index) => {
 
   list.appendChild(div);
   localStorage.setItem("lastSeenIkenTime", Date.now());
+  
+  function filterIken() {
+    const selected = document.getElementById("filterCategory").value;
+    const cards = document.querySelectorAll("#ikenList > div");
+
+    cards.forEach(card => {
+      const text = card.querySelector("p").textContent;
+      card.style.display = selected && !text.includes(`【${selected}】`)
+        ? "none"
+        : "block";
+    });
+  }
 
 });
 
