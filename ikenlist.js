@@ -1,10 +1,12 @@
-ikens.sort((a, b) => b.id - a.id);
 const loginUser = JSON.parse(localStorage.getItem("loginUser"));
 if (!loginUser) {
   location.href = "login.html";
 }
 
 const ikens = JSON.parse(localStorage.getItem("ikens")) || [];
+
+ikens.sort((a, b) => b.id - a.id);
+
 const list = document.getElementById("ikenList");
 list.innerHTML = "";
 
@@ -20,14 +22,15 @@ ikens.forEach((i, index) => {
     <p>【${i.category}】 <strong>${i.userName}</strong>（${i.date}）</p>
     <p>${i.message}</p>
     <p><strong>管理者返信：</strong>${i.reply || "未回答"}</p>
-` ;
+  `;
 
-　if (i.userId === loginUser.id && !loginUser.role) {
+  if (i.userId === loginUser.id && !loginUser.role) {
     const mark = document.createElement("span");
     mark.textContent = "（あなたの投稿）";
     mark.style.color = "green";
     div.prepend(mark);
   }
+
   if (loginUser.role === "管理者") {
     const input = document.createElement("input");
     input.value = i.reply || "";
