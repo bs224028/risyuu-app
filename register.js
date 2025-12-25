@@ -15,11 +15,6 @@ function register() {
     return;
   }
 
-  if (users.find(u => u.name === name)) {
-    alert("このユーザー名はすでに使われています");
-    return;
-  }
-
   users.push({ id, name, password: pw });
   localStorage.setItem("users", JSON.stringify(users));
 
