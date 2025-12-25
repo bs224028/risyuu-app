@@ -14,8 +14,9 @@ function sendIken() {
 
   ikens.push({
     id: Date.now(),
-    userId: loginUser.role ? "admin" : loginUser.id, // ← 識別用
-    userName: loginUser.role ? loginUser.username : loginUser.id, // ← 表示用
+    userId: loginUser.role ? "admin" : loginUser.id,
+    userName: loginUser.role ? loginUser.username : loginUser.id,
+    category: document.getElementById("category").value,
     message: text,
     date: new Date().toLocaleDateString(),
     reply: ""
