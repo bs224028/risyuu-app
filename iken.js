@@ -26,6 +26,8 @@ function sendIken() {
 
   alert("意見を送信しました");
   document.getElementById("iken").value = "";
+  location.href = "ikenlist.html";
+
 }
 
 
