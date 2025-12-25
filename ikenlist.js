@@ -18,6 +18,14 @@ function canDelete(iken) {
 
 ikens.forEach((i, index) => {
   const div = document.createElement("div");
+  if (i.id > lastSeen) {
+    const newMark = document.createElement("span");
+    newMark.textContent = " NEW!";
+    newMark.style.color = "red";
+    newMark.style.fontWeight = "bold";
+    div.appendChild(newMark);
+  }
+
 
   div.innerHTML = `
     <p>【${i.category}】 <strong>${i.userName}</strong>（${i.date}）</p>
