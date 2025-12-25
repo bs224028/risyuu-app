@@ -89,6 +89,20 @@ ikens.forEach((i, index) => {
     });
   }
 
+  function sortIkens() {
+    const mode = document.getElementById("sortSelect").value;
+
+    if (mode === "new") {
+      ikens.sort((a, b) => b.id - a.id);
+    } else {
+      ikens.sort((a, b) => a.id - b.id);
+    }
+
+    localStorage.setItem("ikens", JSON.stringify(ikens));
+    location.reload();
+  }
+
+
 });
 
 
