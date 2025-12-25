@@ -36,3 +36,18 @@ button:hover {
   padding: 10px;
   margin-bottom: 10px;
 }
+
+#ikenList div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#ikenList input {
+  margin-top: 5px;
+}
+
+#ikenList button {
+  width: 100%;
+}
+
