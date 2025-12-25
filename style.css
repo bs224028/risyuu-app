@@ -6,16 +6,12 @@ body {
 }
 
 .container {
-  width: 320px;
-  margin: 80px auto;
+  width: 360px;
+  margin: 60px auto;
   background: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-h1, h2 {
-  margin-top: 0;
+  box-sizing: border-box;
 }
 
 input, textarea, select {
@@ -33,7 +29,6 @@ button {
   color: white;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
 }
 
 button:hover {
@@ -41,27 +36,49 @@ button:hover {
 }
 
 #ikenList {
-  margin-top: 10px;
-}
-
-#ikenList > div {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
+  width: 100%;
   box-sizing: border-box;
 }
 
-#ikenList input {
-  margin-top: 6px;
-}
-.container button + button {
-  margin-top: 8px;
+.iken-card {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: white;
+  box-sizing: border-box;
 }
 
 .my-post {
   border: 2px solid #4caf50;
   background: #e8f5e9;
+}
+
+.iken-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.new-mark {
+  color: red;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.iken-user {
+  color: #1976d2;
+}
+
+.iken-date {
+  font-size: 12px;
+  color: #666;
+}
+
+select {
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 
