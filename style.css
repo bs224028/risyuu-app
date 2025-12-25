@@ -1,43 +1,58 @@
 body {
-  font-family: sans-serif;
-  background: #f4f6f8;
-  margin: 0;
+  font-family: "Meiryo", sans-serif;
+  background: #f0f2f5;
 }
 
 .container {
-  width: 100%;
-  max-width: 700px;
-  margin: 50px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-sizing: border-box;
+  width: 80%;
+  max-width: 900px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
 }
 
-h1, h2 {
+h2 {
   text-align: center;
 }
 
-input, textarea, select {
-  width: 100%;
-  padding: 8px;
-  margin: 8px 0;
-  box-sizing: border-box;
+#ikenList {
+  margin-top: 20px;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 8px;
-  background: #1976d2;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.iken-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 12px;
+  background: #fafafa;
 }
 
-button:hover {
-  background: #1565c0;
+.iken-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.iken-user {
+  font-weight: bold;
+}
+
+.iken-date {
+  color: #666;
+  font-size: 12px;
+}
+
+.my-post {
+  border-left: 6px solid #4caf50;
+}
+
+.new-mark {
+  color: red;
+  font-weight: bold;
+  margin-left: 5px;
 }
 
 .controls {
@@ -45,23 +60,5 @@ button:hover {
   gap: 10px;
 }
 
-.controls select {
-  flex: 1;
-}
-
-#ikenList {
-  margin-top: 10px;
-}
-
-#ikenList > div {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  background: #fafafa;
-}
 
 
