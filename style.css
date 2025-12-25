@@ -1,67 +1,40 @@
 body {
   font-family: sans-serif;
   background: #f4f6f8;
-  margin: 0;
 }
 
 .container {
-  width: 100%;
-  max-width: 700px;
-  margin: 50px auto;
+  width: 320px;
+  margin: 80px auto;
   background: white;
   padding: 20px;
   border-radius: 8px;
-  box-sizing: border-box;
 }
 
-h1, h2 {
-  text-align: center;
-}
-
-input, textarea, select {
+input, textarea {
   width: 100%;
   padding: 8px;
   margin: 8px 0;
-  box-sizing: border-box;
 }
 
 button {
   width: 100%;
   padding: 10px;
-  margin-top: 8px;
+  margin-top: 5px;
   background: #1976d2;
   color: white;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
 }
 
 button:hover {
   background: #1565c0;
 }
 
-.controls {
-  display: flex;
-  gap: 10px;
-}
-
-.controls select {
-  flex: 1;
-}
-
-#ikenList {
-  margin-top: 10px;
-}
-
-#ikenList > div {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+#ikenList div {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 6px;
-  background: #fafafa;
 }
 
 
