@@ -9,7 +9,12 @@
 
 <div class="container">
   <h2>意見一覧</h2>
-  
+
+  <select id="sortSelect" onchange="sortIkens()">
+    <option value="new">新しい順</option>
+    <option value="old">古い順</option>
+  </select>
+
   <select id="filtercategory" onchange="filterIken()">
     <option value="">すべて表示</option>
     <option value="改善依頼">改善依頼</option>
