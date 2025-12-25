@@ -8,8 +8,7 @@ function isNew(date) {
 }
 
 function canDelete(iken) {
-  if (loginUser.role === "管理者") return true;
-  return iken.userId === loginUser.id;
+  return loginUser.role === "管理者" || iken.userId === loginUser.id;
 }
 
 function drawList(data) {
@@ -20,13 +19,15 @@ function drawList(data) {
     const card = document.createElement("div");
     card.className = "iken-card";
 
-    if (i.userId === loginUser.id && !loginUser.role) {
+    if (i.userId === loginUser.id && loginUser.role !== "管理者") {
       card.classList.add("my-post");
     }
 
     card.innerHTML = `
       <div class="iken-header">
-        <span class="iken-user">${i.userId}${isNew(i.date) ? '<span class="new-mark"> NEW</span>' : ''}</span>
+        <span class="iken-user">
+          ${i.userId}${isNew(i.date) ? '<span class="new-mark"> NEW</span>' : ''}
+        </span>
         <span class="iken-date">${i.date}</span>
       </div>
       <p>【${i.category}】</p>
@@ -55,6 +56,7 @@ function drawList(data) {
     if (canDelete(i)) {
       const delBtn = document.createElement("button");
       delBtn.textContent = "削除";
+
       delBtn.onclick = () => {
         if (confirm("削除しますか？")) {
           ikens.splice(index, 1);
@@ -62,6 +64,7 @@ function drawList(data) {
           drawList(data);
         }
       };
+
       card.appendChild(delBtn);
     }
 
