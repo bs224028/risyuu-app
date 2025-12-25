@@ -33,8 +33,10 @@
     `ようこそ ${u.name ?? u.username} さん`;
   
   function logout() {
-    localStorage.removeItem("loginUser");
-    window.location.href = "index.html";
+    if (confirm("ログアウトしますか？")) {
+      localStorage.removeItem("loginUser");
+      location.href = "index.html";
+    }
   }
 </script>
 
